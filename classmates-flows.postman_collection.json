@@ -1,0 +1,938 @@
+{
+	"info": {
+		"name": "classmates-flows",
+		"_postman_id": "815f0e9f-e354-991b-5ea9-e5550ec38d01",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GuestUserActivities",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Courses List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/courses/list",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"courses",
+								"list"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "df3d70d6-0fcf-4848-99e0-30e6972de235",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// Load Postman BDD",
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Get user info after Login', () => {",
+									"",
+									"  it('should return a 200 response', () => {",
+									"    response.should.have.status(200);",
+									"  });",
+									"",
+									"  it('should return a JSON response', () => {",
+									"    response.should.be.json;",
+									"  });",
+									"",
+									"});",
+									"",
+									"var categories = eval(globals.loadHelpers);",
+									"categories.verifyCount(10);",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"php\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"OK\");",
+									"});",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4492082a-e9cf-4c55-9c64-a66b511f67fc",
+								"type": "text/javascript",
+								"exec": [
+									"postman.setGlobalVariable(\"loadHelpers\", function loadHelpers() {",
+									"    let categories = {};",
+									" ",
+									"    categories.verifyCount = function verifyCount(expectedCount) {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        tests[\"Categories cloud of Tags is counted to : \" + expectedCount] ",
+									"            = jsonData.length === expectedCount;",
+									"    }",
+									"",
+									"    return categories;",
+									"} + '; loadHelpers();');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/category/list",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"category",
+								"list"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Searches for Courses by Industry [1]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/search/course?industry_id=1",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"search",
+								"course"
+							],
+							"query": [
+								{
+									"key": "industry_id",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Searches for Courses by Industry [2]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/search/course?industry_id=2",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"search",
+								"course"
+							],
+							"query": [
+								{
+									"key": "industry_id",
+									"value": "2",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Searches for Courses by Industry [3]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/search/course?industry_id=3",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"search",
+								"course"
+							],
+							"query": [
+								{
+									"key": "industry_id",
+									"value": "3",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Public Course Preview",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user-token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/course/preview?course_id=1",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"course",
+								"preview"
+							],
+							"query": [
+								{
+									"key": "course_id",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registered User Activities",
+			"description": "",
+			"item": [
+				{
+					"name": "Sign up via form",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var test = pm.test;",
+									"var expect = pm.expect;",
+									"var response = pm.response;",
+									"var jsonResponse = response.json();",
+									"",
+									"/*test(\"schema is valid\", function() {",
+									"    var schema = ",
+									"    {",
+									"        \"required\": [",
+									"            \"first_name\",",
+									"            \"last_name\",",
+									"            \"email\",",
+									"            \"password\"",
+									"        ],",
+									"        \"properties\": {",
+									"            \"first_name\": {",
+									"                \"type\": \"string\"",
+									"            },",
+									"            \"last_name\": {",
+									"                \"type\": \"string\"",
+									"            },",
+									"            \"email\": {",
+									"                \"type\": \"string\"",
+									"            },",
+									"            \"password\": {",
+									"                \"type\": \"string\"",
+									"            }",
+									"        }",
+									"   };",
+									"    //var result = tv4.validateResult(jsonResponse, schema);",
+									"    expect(tv4.validate(jsonResponse, schema)).to.be.true;",
+									"});",
+									"*/",
+									"",
+									"test(\"Successful POST request\", function () {",
+									"    expect(response.code).to.be.oneOf([200,202]);",
+									"});",
+									"",
+									"postman.setEnvironmentVariable(\"user-token\", jsonResponse.token);",
+									"postman.setEnvironmentVariable(\"user-name\", jsonResponse.part_email);",
+									"postman.setEnvironmentVariable(\"user-password\", \"123456\");",
+									"",
+									"",
+									"postman.setNextRequest(\"Cannot use same Email twice\");",
+									""
+								],
+								"id": "9fab2a73-a5bf-40d8-b17a-419d98ee10c8",
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"type": "text",
+									"value": "Ivan"
+								},
+								{
+									"key": "last_name",
+									"type": "text",
+									"value": "Ivanovich"
+								},
+								{
+									"key": "email",
+									"type": "text",
+									"value": "ivan.ivanovich{{$randomInt}}@gmail.com"
+								},
+								{
+									"key": "user_photo",
+									"type": "file",
+									"value": ""
+								},
+								{
+									"key": "password",
+									"type": "text",
+									"value": "123456"
+								},
+								{
+									"key": "password_confirmation",
+									"type": "text",
+									"value": "123456"
+								},
+								{
+									"key": "phone",
+									"type": "text",
+									"value": "342343432"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ext_api}}/sign_up",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"sign_up"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "0a6a6d51-5343-42ae-b3d6-7f89ebe7ee47",
+							"name": "sign_up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "Ivan",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "Ivanovich",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "ivan.ivanovichova@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "user_photo",
+											"type": "file",
+											"src": {
+												"0": {}
+											}
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "342343432",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://diprella.selectotech.com/api/sign_up",
+									"protocol": "http",
+									"host": [
+										"diprella",
+										"selectotech",
+										"com"
+									],
+									"path": [
+										"api",
+										"sign_up"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"description": "",
+									"key": "Cache-Control",
+									"name": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"description": "",
+									"key": "Connection",
+									"name": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"description": "",
+									"key": "Date",
+									"name": "Date",
+									"value": "Thu, 25 May 2017 20:25:51 GMT"
+								},
+								{
+									"description": "",
+									"key": "Server",
+									"name": "Server",
+									"value": "nginx"
+								},
+								{
+									"description": "",
+									"key": "Transfer-Encoding",
+									"name": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"description": "",
+									"key": "X-Powered-By",
+									"name": "X-Powered-By",
+									"value": "PleskLin"
+								},
+								{
+									"description": "",
+									"key": "X-RateLimit-Limit",
+									"name": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"description": "",
+									"key": "X-RateLimit-Remaining",
+									"name": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"description": "",
+									"key": "expires",
+									"name": "expires",
+									"value": "-1"
+								},
+								{
+									"description": "",
+									"key": "pragma",
+									"name": "pragma",
+									"value": "no-cache"
+								}
+							],
+							"cookie": [],
+							"responseTime": "605",
+							"body": "{\"token\":\"rVdLsNAOOduktgYvFsU6Z2c9Q6qm01U5EkCAdyhgRJjrgkU0bfbWRvqpJlrfd2vi\"}"
+						}
+					]
+				},
+				{
+					"name": "Cannot use same Email twice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(responseBody.has(\"The email has already been taken.\")) {",
+									"  tests[\"Cannot Register using same Email twice\"] = responseBody.has(\"The email has already been taken.\");",
+									"}",
+									"",
+									"postman.setNextRequest(\"Authorization/Login BDD\");"
+								],
+								"id": "942899a8-9247-42c1-a341-a4b6b45e0e4c",
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"type": "text",
+									"value": "Ivan"
+								},
+								{
+									"key": "last_name",
+									"type": "text",
+									"value": "Ivanovich"
+								},
+								{
+									"key": "email",
+									"type": "text",
+									"value": "{{user-name}}@gmail.com"
+								},
+								{
+									"key": "user_photo",
+									"type": "file",
+									"value": ""
+								},
+								{
+									"key": "password",
+									"type": "text",
+									"value": "123456"
+								},
+								{
+									"key": "password_confirmation",
+									"type": "text",
+									"value": "123456"
+								},
+								{
+									"key": "phone",
+									"type": "text",
+									"value": "342343432"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ext_api}}/sign_up",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"sign_up"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "2e543fd5-3976-4126-a50e-8f74846d65a2",
+							"name": "sign_up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "Ivan",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "Ivanovich",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "ivan.ivanovichova@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "user_photo",
+											"type": "file",
+											"src": {
+												"0": {}
+											}
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "342343432",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://diprella.selectotech.com/api/sign_up",
+									"protocol": "http",
+									"host": [
+										"diprella",
+										"selectotech",
+										"com"
+									],
+									"path": [
+										"api",
+										"sign_up"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"description": "",
+									"key": "Cache-Control",
+									"name": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"description": "",
+									"key": "Connection",
+									"name": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"description": "",
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"description": "",
+									"key": "Date",
+									"name": "Date",
+									"value": "Thu, 25 May 2017 20:25:51 GMT"
+								},
+								{
+									"description": "",
+									"key": "Server",
+									"name": "Server",
+									"value": "nginx"
+								},
+								{
+									"description": "",
+									"key": "Transfer-Encoding",
+									"name": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"description": "",
+									"key": "X-Powered-By",
+									"name": "X-Powered-By",
+									"value": "PleskLin"
+								},
+								{
+									"description": "",
+									"key": "X-RateLimit-Limit",
+									"name": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"description": "",
+									"key": "X-RateLimit-Remaining",
+									"name": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"description": "",
+									"key": "expires",
+									"name": "expires",
+									"value": "-1"
+								},
+								{
+									"description": "",
+									"key": "pragma",
+									"name": "pragma",
+									"value": "no-cache"
+								}
+							],
+							"cookie": [],
+							"responseTime": "605",
+							"body": "{\"token\":\"rVdLsNAOOduktgYvFsU6Z2c9Q6qm01U5EkCAdyhgRJjrgkU0bfbWRvqpJlrfd2vi\"}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Load Postman BDD",
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Get user info after Login', () => {",
+									"",
+									"  it('I should get a responce with 200 status code', () => {",
+									"    response.should.have.status(200);",
+									"  });",
+									"",
+									"  it('should return a JSON response', () => {",
+									"    response.should.be.json;",
+									"  });",
+									"",
+									"  it('should return the correct User Name', () => {",
+									"    response.body.first_name.should.equal('Ivan'); ",
+									"  });",
+									"  ",
+									"   it('should return the correct User Surname', () => {",
+									"    response.body.last_name.should.equal('Ivanovich'); ",
+									"  });",
+									"    ",
+									"   it('should return the correct Email', () => {",
+									"    response.body.email.should.equal('ivan.ivanovichova@gmail.com'); ",
+									"  });",
+									"  ",
+									"  it('should return the correct Phone', () => {",
+									"    response.body.phone.should.equal('342343432'); ",
+									"  });",
+									"  ",
+									"  it('User Type should be simple user', () => {",
+									"    response.body.type.should.equal('user'); ",
+									"  });",
+									"  ",
+									"  it('User should not be belonged to any Company', () => {",
+									"    response.body.company_id.should.equal(0); ",
+									"  });",
+									"  ",
+									"  it('first part of email should be returned as separate parameter', () => {",
+									"    response.body.part_email.should.equal('ivan.ivanovichova'); ",
+									"  });",
+									"  ",
+									"  it('URL value should be as first part of email', () => {",
+									"    response.body.url.should.equal('ivan-ivanovichova'); ",
+									"  });",
+									"  ",
+									"  it('user should be active by default', () => {",
+									"    response.body.status.should.equal(1); ",
+									"  });",
+									"  ",
+									"  postman.setEnvironmentVariable(\"user-token\", response.body.token);",
+									" ",
+									"  ",
+									"});",
+									"",
+									"postman.setNextRequest(\"Incorrect Login BDD\")"
+								],
+								"id": "c4bcecf2-869d-416c-9de9-17324a0d5453",
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"type": "text",
+									"value": "{{user-name}}@gmail.com"
+								},
+								{
+									"key": "password",
+									"type": "text",
+									"value": "123456"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ext_api}}/login",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Incorrect Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Load Postman BDD",
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Get user info after Login', () => {",
+									"",
+									"  it('should return a 200 response', () => {",
+									"    response.should.have.status(200);",
+									"  });",
+									"",
+									"  it('should return a JSON response', () => {",
+									"    response.should.be.json;",
+									"  });",
+									"",
+									"  it('should return the error message', () => {",
+									"    response.body.result.should.equal('wrong email or password.'); ",
+									"  });",
+									"  ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"type": "text",
+									"value": "ivan-ivanovichova@gmail.com"
+								},
+								{
+									"key": "password",
+									"type": "text",
+									"value": "123456"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ext_api}}/login",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "If Username or Password is wrong or not provided."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Creating Courses",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Enrolling to Courses",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Course-passing",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Course-managment",
+			"description": "",
+			"item": []
+		}
+	]
+}
