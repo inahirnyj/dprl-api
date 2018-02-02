@@ -1,0 +1,280 @@
+{
+	"info": {
+		"name": "Diprella-flows",
+		"_postman_id": "815f0e9f-e354-991b-5ea9-e5550ec38d01",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GuestUserActivities",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Courses List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user-token}}",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/courses/list",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"courses",
+								"list"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// Load Postman BDD",
+									"eval(globals.postmanBDD);",
+									"",
+									"describe('Get user info after Login', () => {",
+									"",
+									"  it('should return a 200 response', () => {",
+									"    response.should.have.status(200);",
+									"  });",
+									"",
+									"  it('should return a JSON response', () => {",
+									"    response.should.be.json;",
+									"  });",
+									"",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/category/list",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"category",
+								"list"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Searches for Courses by Industry [1]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/search/course?industry_id=1",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"search",
+								"course"
+							],
+							"query": [
+								{
+									"key": "industry_id",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Searches for Courses by Industry [2]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/search/course?industry_id=2",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"search",
+								"course"
+							],
+							"query": [
+								{
+									"key": "industry_id",
+									"value": "2",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Searches for Courses by Industry [3]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/search/course?industry_id=3",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"search",
+								"course"
+							],
+							"query": [
+								{
+									"key": "industry_id",
+									"value": "3",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Public Course Preview",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user-token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/course/preview?course_id=1",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"course",
+								"preview"
+							],
+							"query": [
+								{
+									"key": "course_id",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registered User Activities",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Creating Courses",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Enrolling to Courses",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Course-passing",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Course-managment",
+			"description": "",
+			"item": []
+		}
+	]
+}
