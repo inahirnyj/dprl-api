@@ -336,7 +336,7 @@
 			]
 		},
 		{
-			"name": "Creating Courses",
+			"name": "CreatingCourses",
 			"description": "",
 			"item": [
 				{
@@ -345,26 +345,41 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3d82d542-122e-473a-ab22-69c2e8454201",
+								"id": "8b67313d-746c-4b81-97e2-103813f5a4c4",
 								"type": "text/javascript",
 								"exec": [
 									"",
 									"// Load Postman BDD",
 									"eval(globals.postmanBDD);",
 									"",
-									"describe('Get Categories list', () => {",
+									"postman.setGlobalVariable(\"СommonTestsForSuccessfullResponce\", () => {",
 									"",
-									"  it('should return a 200 response', () => {",
-									"    response.should.have.status(200);",
+									"  it('Common Case 1: should return one of success responces with 200, 201 or 202 status code', () => {",
+									"        response.status.should.be.oneOf([201, 200, 202]); ",
 									"  });",
 									"",
-									"  it('should return a JSON response', () => {",
+									"  it('Common Case 2: should return a JSON response', () => {",
 									"    response.should.be.json;",
 									"  });",
 									"  ",
+									"  it('Common Case 3: should return OK message in response', () => {",
+									"     response.ok.should.be.true;",
+									"  });",
+									"  ",
+									"   it('Common Case 4: should return no empty Body', () => {",
+									"     response.body.should.not.be.empty;",
+									"  });",
+									"  ",
+									"});",
+									"",
+									"// First, run the common tests",
+									"eval(globals.СommonTestsForSuccessfullResponce)();",
+									"",
+									"describe('Get Categories list', () => {",
+									"",
 									"  it('should return an array of categories', () => {",
 									"\t response.body.should.be.an('array').with.length.at.least(1);",
-									"});",
+									"    });",
 									"",
 									"});",
 									"",
@@ -420,23 +435,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2a4851a4-f40b-4dfc-bd89-a6b6962ada4b",
+								"id": "b8dd2a83-8d47-434b-ba2d-7074dcd684da",
 								"type": "text/javascript",
 								"exec": [
 									"",
 									"// Load Postman BDD",
 									"eval(globals.postmanBDD);",
-									"describe('Get customer info', () => {",
-									"",
-									"  it('should return a 200 response', () => {",
-									"    response.should.have.status(200);",
-									"  });",
-									"",
-									"  it('should return a JSON response', () => {",
-									"    response.should.be.json;",
-									"  });",
-									"",
-									"});"
+									"eval(globals.СommonTestsForSuccessfullResponce)();"
 								]
 							}
 						}
@@ -465,45 +470,6 @@
 								"info"
 							]
 						},
-						"description": null
-					},
-					"response": []
-				},
-				{
-					"name": "Get Course Modules list copy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{ext_api}}/course/module/list?course_id=1",
-							"host": [
-								"{{ext_api}}"
-							],
-							"path": [
-								"course",
-								"module",
-								"list"
-							],
-							"query": [
-								{
-									"key": "course_id",
-									"value": "1",
-									"equals": true
-								}
-							]
-						},
 						"description": ""
 					},
 					"response": []
@@ -514,7 +480,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7f5f413f-713b-4f72-a9e4-5388dcaaa499",
+								"id": "531bd2ab-6d6d-4349-8f6c-95cf8adddceb",
 								"type": "text/javascript",
 								"exec": [
 									"",
@@ -536,7 +502,7 @@
 									"    } else {",
 									"    \tpostman.setNextRequest(null);",
 									"\t}",
-									"",
+									"// Running Common set of test cases",
 									"eval(globals.СommonTestsForSuccessfullResponce)();",
 									"",
 									"\tdescribe('Get Course after its registration', () => {",
@@ -560,20 +526,21 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "5c639d4d-9032-4ff8-93de-caa84c4ca2a9",
+								"id": "d381d699-48a0-491f-b31f-32dbfe81ba1b",
 								"type": "text/javascript",
 								"exec": [
 									"var privacies = pm.environment.get(\"privacies\");",
 									"",
 									"if(!privacies) { ",
 									"\tprivacies = [\"public\", \"private\", \"protected\"];",
+									"\t} else if(privacies.length == 0) {",
+									"\t   privacies = [\"public\", \"private\", \"protected\"]; ",
 									"\t}",
 									"\t",
 									"var currentPrivacy = privacies.shift();",
 									"",
 									"pm.environment.set(\"privacy\", currentPrivacy);",
-									"pm.environment.set(\"privacies\", privacies);",
-									""
+									"pm.environment.set(\"privacies\", privacies);"
 								]
 							}
 						}
@@ -787,7 +754,7 @@
 					},
 					"response": [
 						{
-							"id": "dbcd9804-a778-4f4e-a10e-c72bef3dfd69",
+							"id": "0c429184-5b5e-4218-a7fd-1d06bad2091b",
 							"name": "sign_up",
 							"originalRequest": {
 								"method": "POST",
@@ -998,7 +965,7 @@
 					},
 					"response": [
 						{
-							"id": "aa34eb39-0619-4fe8-9e25-29ee856190ae",
+							"id": "148bf60d-f791-4ae9-aba9-6430895495db",
 							"name": "sign_up",
 							"originalRequest": {
 								"method": "POST",
@@ -1983,6 +1950,47 @@
 							]
 						},
 						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course Modules list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3b62c8cd-2d35-445b-b6f6-64e5658e5f4e",
+								"type": "text/javascript",
+								"exec": [
+									"eval(globals.postmanBDD);",
+									"eval(globals.СommonTestsForSuccessfullResponce)();"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/course/module/list?course_id=1",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"course",
+								"module",
+								"list"
+							],
+							"query": [
+								{
+									"key": "course_id",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
 					},
 					"response": []
 				}
