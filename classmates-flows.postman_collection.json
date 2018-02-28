@@ -16,7 +16,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6a19f91b-de7a-4e6f-ae58-d96d3763d928",
+								"id": "c6e9dbb4-9a7c-4ec7-b9c9-4b960796cea7",
 								"type": "text/javascript",
 								"exec": [
 									"// Load Postman BDD",
@@ -37,16 +37,13 @@
 									"     response.ok.should.be.true;",
 									"  });",
 									"  ",
-									"   it('Common Case 4: should return no empty Body', () => {",
-									"     response.body.should.not.be.empty;",
-									"  });",
-									"  ",
 									"});",
 									"",
 									"// First, run the common tests",
 									"eval(globals.СommonTestsForSuccessfullResponce)();",
+									"categories.verifyCount(10);",
 									"",
-									"categories.verifyCount(10);"
+									""
 								]
 							}
 						},
@@ -136,9 +133,12 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "8958ef30-9d92-49c2-8be9-1012acdaf529",
 								"type": "text/javascript",
 								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+									"eval(globals.postmanBDD);",
+									"// First, run the common tests",
+									"eval(globals.СommonTestsForSuccessfullResponce)();"
 								]
 							}
 						}
@@ -164,7 +164,7 @@
 								}
 							]
 						},
-						"description": null
+						"description": ""
 					},
 					"response": []
 				},
@@ -174,9 +174,12 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "c9701978-3c1a-459b-a445-8b8d0a4be189",
 								"type": "text/javascript",
 								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+									"eval(globals.postmanBDD);",
+									"// First, run the common tests",
+									"eval(globals.СommonTestsForSuccessfullResponce)();"
 								]
 							}
 						}
@@ -202,7 +205,7 @@
 								}
 							]
 						},
-						"description": null
+						"description": ""
 					},
 					"response": []
 				},
@@ -249,19 +252,19 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "922c83bf-7829-4d14-885c-288a8a791a6e",
+								"id": "b4691bd6-1fa6-411d-8366-cbdffb11e644",
 								"type": "text/javascript",
 								"exec": [
 									"",
 									"// Define the JSON Schema",
 									"const courseDatailsSchema = {",
 									"  \"required\": [\"id\"],",
-									"  \"properties\": {",
+									"  \"items\": {",
 									"    \"id\": {",
-									"      \"type\": \"integer\"",
+									"      \"type\": \"string\"",
 									"    },",
 									"    \"user_id\": {",
-									"      \"type\": \"integer\"",
+									"      \"type\": \"string\"",
 									"    },",
 									"    \"lang\": {",
 									"      \"type\": \"string\"",
@@ -269,34 +272,19 @@
 									"  }",
 									"};",
 									"",
-									"// Test whether the response matches the schema",
-									"",
-									"//tests[\"Course Details schema is valid\"] = tv4.validate(course, courseDatailsSchema);",
-									"",
 									"eval(globals.postmanBDD);",
+									"// First, run the common tests",
+									"eval(globals.СommonTestsForSuccessfullResponce)();",
+									"",
 									"describe('Get Course info', () => {",
 									"",
-									"  it('should return a valid response', () => {",
-									"    response.should.have.status(200);",
-									"    response.should.be.json;",
-									"    response.body.should.not.be.empty;",
-									"  });",
-									"  ",
-									"    it('should match the customer schema', () => {",
-									"    var course = JSON.parse(responseBody);",
-									"    response.body.should.have.schema(courseDatailsSchema);",
-									"  });",
+									"    it('Test 1: should return valid Responce schema', () => {",
+									"        tv4.validate(response.body, courseDatailsSchema).should.be.true;",
+									"    });",
 									"",
-									"  it('should set the Location header', () => {",
-									"    response.should.have.header('Location');",
-									"  });",
-									"",
-									"  it('should return the correct customer', () => {",
-									"    response.body.id.should.equal(12345);",
-									"    response.body.age.should.be.above(18).and.below(99);",
-									"    response.body.firstName.should.be.a('string').and.not.empty;",
-									"    response.body.lastName.should.be.oneOf(['Smith', 'Jones', 'Robinson']);",
-									"  });",
+									"    it('Test 2: should return the proper privacy', () => {",
+									"        response.body.privacy.should.be.oneOf(['public', 'private', 'protected']);",
+									"    });",
 									"",
 									"});"
 								]
@@ -327,302 +315,6 @@
 									"value": "1",
 									"equals": true
 								}
-							]
-						},
-						"description": null
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "CreatingCourses",
-			"description": "",
-			"item": [
-				{
-					"name": "Get Categories List",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8b67313d-746c-4b81-97e2-103813f5a4c4",
-								"type": "text/javascript",
-								"exec": [
-									"",
-									"// Load Postman BDD",
-									"eval(globals.postmanBDD);",
-									"",
-									"postman.setGlobalVariable(\"СommonTestsForSuccessfullResponce\", () => {",
-									"",
-									"  it('Common Case 1: should return one of success responces with 200, 201 or 202 status code', () => {",
-									"        response.status.should.be.oneOf([201, 200, 202]); ",
-									"  });",
-									"",
-									"  it('Common Case 2: should return a JSON response', () => {",
-									"    response.should.be.json;",
-									"  });",
-									"  ",
-									"  it('Common Case 3: should return OK message in response', () => {",
-									"     response.ok.should.be.true;",
-									"  });",
-									"  ",
-									"   it('Common Case 4: should return no empty Body', () => {",
-									"     response.body.should.not.be.empty;",
-									"  });",
-									"  ",
-									"});",
-									"",
-									"// First, run the common tests",
-									"eval(globals.СommonTestsForSuccessfullResponce)();",
-									"",
-									"describe('Get Categories list', () => {",
-									"",
-									"  it('should return an array of categories', () => {",
-									"\t response.body.should.be.an('array').with.length.at.least(1);",
-									"    });",
-									"",
-									"});",
-									"",
-									"var categories = eval(globals.loadHelpers);",
-									"categories.verifyCount(10);",
-									"",
-									""
-								]
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "4492082a-e9cf-4c55-9c64-a66b511f67fc",
-								"type": "text/javascript",
-								"exec": [
-									"postman.setGlobalVariable(\"loadHelpers\", function loadHelpers() {",
-									"    let categories = {};",
-									" ",
-									"    categories.verifyCount = function verifyCount(expectedCount) {",
-									"        var jsonData = JSON.parse(responseBody);",
-									"        tests[\"Categories cloud of Tags is counted to : \" + expectedCount] ",
-									"            = jsonData.length === expectedCount;",
-									"    }",
-									"",
-									"    return categories;",
-									"} + '; loadHelpers();');"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{ext_api}}/category/list",
-							"host": [
-								"{{ext_api}}"
-							],
-							"path": [
-								"category",
-								"list"
-							]
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get User Profile Info",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "b8dd2a83-8d47-434b-ba2d-7074dcd684da",
-								"type": "text/javascript",
-								"exec": [
-									"",
-									"// Load Postman BDD",
-									"eval(globals.postmanBDD);",
-									"eval(globals.СommonTestsForSuccessfullResponce)();"
-								]
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{user-token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{ext_api}}/profile/info",
-							"host": [
-								"{{ext_api}}"
-							],
-							"path": [
-								"profile",
-								"info"
-							]
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Create Course",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "531bd2ab-6d6d-4349-8f6c-95cf8adddceb",
-								"type": "text/javascript",
-								"exec": [
-									"",
-									"eval(globals.postmanBDD);",
-									"",
-									"var privacies = pm.environment.get(\"privacies\");",
-									"var privacy = pm.environment.get(\"privacy\");",
-									"var ext_api = pm.environment.get(\"ext_api\");",
-									"",
-									"var schema = {",
-									"  \"items\": {",
-									"    \"id\": \"string\"",
-									"  }",
-									"};",
-									"",
-									"if(privacies && privacies.length > 0) {",
-									"    postman.setNextRequest(ext_api+'/course/create');",
-									"    ",
-									"    } else {",
-									"    \tpostman.setNextRequest(null);",
-									"\t}",
-									"// Running Common set of test cases",
-									"eval(globals.СommonTestsForSuccessfullResponce)();",
-									"",
-									"\tdescribe('Get Course after its registration', () => {",
-									"          ",
-									"          it('Test 1: should return the not empty course id', () => {",
-									"            response.body.should.have.property('id');",
-									"          });",
-									"          ",
-									"          it('Test 2: should return valid Responce schema', () => {",
-									"            //response.body.should.have.property('id');",
-									"            tv4.validate(response.body, schema).should.be.true;",
-									"          });",
-									"",
-									"        });",
-									"    ",
-									"",
-									"pm.environment.set(privacy+\"-course-id\", response.body.id);"
-								]
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "d381d699-48a0-491f-b31f-32dbfe81ba1b",
-								"type": "text/javascript",
-								"exec": [
-									"var privacies = pm.environment.get(\"privacies\");",
-									"",
-									"if(!privacies) { ",
-									"\tprivacies = [\"public\", \"private\", \"protected\"];",
-									"\t} else if(privacies.length == 0) {",
-									"\t   privacies = [\"public\", \"private\", \"protected\"]; ",
-									"\t}",
-									"\t",
-									"var currentPrivacy = privacies.shift();",
-									"",
-									"pm.environment.set(\"privacy\", currentPrivacy);",
-									"pm.environment.set(\"privacies\", privacies);"
-								]
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{user-token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "Representational state transfer (REST) is a stateless software architecture",
-									"type": "text"
-								},
-								{
-									"key": "privacy",
-									"value": "{{privacy}}",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"value": "",
-									"type": "file"
-								},
-								{
-									"key": "thumb_image",
-									"value": "",
-									"type": "file"
-								},
-								{
-									"key": "video_cover",
-									"value": "",
-									"type": "file"
-								},
-								{
-									"key": "industry_id",
-									"value": "",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "Client-Server\nThe client-server constraint works on the concept that the client and the server should be separate from each other and allowed to evolve individually and independently. In other words, I should be able to make changes to my mobile application without impacting either the data structure or the database design on the server. At the same time, I should be able to modify the database or make changes to my server application without impacting the mobile client. This creates a separation of \nconcerns, letting each application grow and scale independently of the other and allowing your organization to grow quickly and efficiently.\n\nStateless\nREST APIs are stateless, meaning that calls can be made independently of one another, and each call contains all of the data necessary to complete itself successfully. A REST API should not rely on data being stored on the server or sessions to determine what to do with a call, but rather solely rely on the data that is provided in that call itself. Identifying information is not being stored on the server when making calls. Instead, each call has the necessary data in itself, such as the API key, access token, user ID, etc. This also helps increase the API’s reliability by having all of the data necessary to make the call, instead of relying on a series of calls with server state to create an object, which may result in partial fails. Instead, in order to reduce memory requirements and keep your application as scalable as possible, a RESTful API requires that any state is stored on the client—not on the server.\n\nCache\nBecause a stateless API can increase request overhead by handling large loads of incoming and outbound calls, a REST API should be designed to encourage the storage of cacheable data. This means that when data is cacheable, the response should indicate that the data can be stored up to a certain time (expires-at), or in cases where data needs to be real-time, that the response should not be cached by the client. By enabling this critical constraint, you will not only greatly reduce the number of interactions with your API, reducing internal server usage, but also provide your API users with the tools necessary to provide the fastest and most efficient apps possible. Keep in mind that caching is done on the client side. While you may be able to cache some data within your architecture to perform overall performance, the intent is to instruct the client on how it should proceed and whether or not the client can store the data temporarily.\n\nUniform Interface\nThe key to the decoupling client from server is having a uniform interface that allows independent evolution of the application without having the application’s services, models, or actions tightly coupled to the API layer itself. The uniform interface lets the client talk to the server in a single language, independent of the architectural backend of either. This interface should provide an unchanging, standardized means of communicating between the client and the server, such as using HTTP with URI resources, CRUD (Create, Read, Update, Delete), and JSON.\n\nLayered System\nAs the name implies, a layered system is a system comprised of layers, with each layer having a specific functionality and responsibility. If we think of a Model View Controller framework, each layer has its own responsibilities, with the models comprising how the data should be formed, the controller focusing on the incoming actions and the view focusing on the output. Each layer is separate but also interacts with the other. In REST API design, the same principle holds true, with different layers of the architecture working together to build a hierarchy that helps create a more scalable and modular application.\nA layered system also lets you encapsulate legacy systems and move less commonly accessed functionality to a shared intermediary while also shielding more modern and commonly used components from them. Additionally, the layered system gives you the freedom to move systems in and out of your architecture as technologies and services evolve, increasing flexibility and longevity as long as you keep the different modules as loosely coupled as possible. There are substantial security benefits of having a layered system since it allows you to stop attacks at the proxy layer, or within other layers, preventing them from getting to your actual server architecture. By utilizing a layered system with a proxy, or creating a single point of access, you are able to keep critical and more vulnerable aspects of your architecture behind a firewall, preventing direct interaction with them by the client. Keep in mind that security is not based on single “stop all” solution, but rather on having multiple layers with the understanding that certain security checks may fail or be bypassed. As such, the more security you are able to implement into your system, the more likely you are to prevent damaging Attacks.\n\nCode on Demand\nPerhaps the least known of the six constraints, and the only optional constraint, Code on Demand allows for code or applets to be transmitted via the API for use within the application. In essence, it creates a smart application that is no longer solely dependent on its own code structure. However, perhaps because it’s ahead of its time, Code on Demand has struggled for adoption as Web APIs are consumed across multiple languages and the transmission of code raises security questions and concerns. (For example, the directory would have to be writeable, and the firewall would have to let what may normally be restricted content through.)\nTogether, these constraints make up the theory of Representational State Transfer, or REST. As you look back through these you can see how each successive constraint builds on top of the previous, eventually creating a rather complex—but powerful and flexible—application program interface. But most importantly, these constraints make up a design that operates similarly to how we access pages in our browsers on the World Wide Web. It creates an API that is not dictated by its architecture, but by the representations that it returns, and an API that—while architecturally stateless—relies on the representation to dictate the application’s state.\n",
-									"type": "text"
-								},
-								{
-									"key": "categories_id",
-									"value": "",
-									"type": "text"
-								},
-								{
-									"key": "level",
-									"value": "beginner",
-									"description": "",
-									"type": "text"
-								},
-								{
-									"key": "lang",
-									"value": "English",
-									"description": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{ext_api}}/course/create",
-							"host": [
-								"{{ext_api}}"
-							],
-							"path": [
-								"course",
-								"create"
 							]
 						},
 						"description": ""
@@ -754,7 +446,7 @@
 					},
 					"response": [
 						{
-							"id": "0c429184-5b5e-4218-a7fd-1d06bad2091b",
+							"id": "c10047bd-c419-4598-be81-5d10d6d3228e",
 							"name": "sign_up",
 							"originalRequest": {
 								"method": "POST",
@@ -965,7 +657,7 @@
 					},
 					"response": [
 						{
-							"id": "148bf60d-f791-4ae9-aba9-6430895495db",
+							"id": "48deb66e-ded5-4685-93a8-531dc8ccf81e",
 							"name": "sign_up",
 							"originalRequest": {
 								"method": "POST",
@@ -1988,6 +1680,304 @@
 									"value": "1",
 									"equals": true
 								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CreatingCourses",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Categories List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b67313d-746c-4b81-97e2-103813f5a4c4",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// Load Postman BDD",
+									"eval(globals.postmanBDD);",
+									"",
+									"postman.setGlobalVariable(\"СommonTestsForSuccessfullResponce\", () => {",
+									"",
+									"  it('Common Case 1: should return one of success responces with 200, 201 or 202 status code', () => {",
+									"        response.status.should.be.oneOf([201, 200, 202]); ",
+									"  });",
+									"",
+									"  it('Common Case 2: should return a JSON response', () => {",
+									"    response.should.be.json;",
+									"  });",
+									"  ",
+									"  it('Common Case 3: should return OK message in response', () => {",
+									"     response.ok.should.be.true;",
+									"  });",
+									"  ",
+									"   it('Common Case 4: should return no empty Body', () => {",
+									"     response.body.should.not.be.empty;",
+									"  });",
+									"  ",
+									"});",
+									"",
+									"// First, run the common tests",
+									"eval(globals.СommonTestsForSuccessfullResponce)();",
+									"",
+									"describe('Get Categories list', () => {",
+									"",
+									"  it('should return an array of categories', () => {",
+									"\t response.body.should.be.an('array').with.length.at.least(1);",
+									"    });",
+									"",
+									"});",
+									"",
+									"var categories = eval(globals.loadHelpers);",
+									"categories.verifyCount(10);",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4492082a-e9cf-4c55-9c64-a66b511f67fc",
+								"type": "text/javascript",
+								"exec": [
+									"postman.setGlobalVariable(\"loadHelpers\", function loadHelpers() {",
+									"    let categories = {};",
+									" ",
+									"    categories.verifyCount = function verifyCount(expectedCount) {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        tests[\"Categories cloud of Tags is counted to : \" + expectedCount] ",
+									"            = jsonData.length === expectedCount;",
+									"    }",
+									"",
+									"    return categories;",
+									"} + '; loadHelpers();');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/category/list",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"category",
+								"list"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8dd2a83-8d47-434b-ba2d-7074dcd684da",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// Load Postman BDD",
+									"eval(globals.postmanBDD);",
+									"eval(globals.СommonTestsForSuccessfullResponce)();"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{ext_api}}/profile/info",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"profile",
+								"info"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ceec1467-b95a-4277-b26f-f8347ffcac63",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"eval(globals.postmanBDD);",
+									"",
+									"var privacies = pm.environment.get(\"privacies\");",
+									"var privacy = pm.environment.get(\"privacy\");",
+									"var ext_api = pm.environment.get(\"ext_api\");",
+									"",
+									"var schema = {",
+									"  \"items\": {",
+									"    \"id\": \"string\"",
+									"  }",
+									"};",
+									"",
+									"if(privacies && privacies.length > 0) {",
+									"    postman.setNextRequest('Create Course');",
+									"    ",
+									"    } else {",
+									"    \tpostman.setNextRequest(null);",
+									"\t}",
+									"\t",
+									"// Running Common set of test cases",
+									"eval(globals.СommonTestsForSuccessfullResponce)();",
+									"",
+									"\tdescribe('Get Course after its registration', () => {",
+									"          ",
+									"          it('Test 1: should return the not empty course id', () => {",
+									"            response.body.should.have.property('id');",
+									"          });",
+									"          ",
+									"          it('Test 2: should return valid Responce schema', () => {",
+									"            //response.body.should.have.property('id');",
+									"            tv4.validate(response.body, schema).should.be.true;",
+									"          });",
+									"",
+									"        });",
+									"    ",
+									"",
+									"pm.environment.set(privacy+\"-course-id\", response.body.id);"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d381d699-48a0-491f-b31f-32dbfe81ba1b",
+								"type": "text/javascript",
+								"exec": [
+									"var privacies = pm.environment.get(\"privacies\");",
+									"",
+									"if(!privacies) { ",
+									"\tprivacies = [\"public\", \"private\", \"protected\"];",
+									"\t} else if(privacies.length == 0) {",
+									"\t   privacies = [\"public\", \"private\", \"protected\"]; ",
+									"\t}",
+									"\t",
+									"var currentPrivacy = privacies.shift();",
+									"",
+									"pm.environment.set(\"privacy\", currentPrivacy);",
+									"pm.environment.set(\"privacies\", privacies);"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Representational state transfer (REST) is a stateless software architecture",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "thumb_image",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "video_cover",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "industry_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Client-Server\nThe client-server constraint works on the concept that the client and the server should be separate from each other and allowed to evolve individually and independently. In other words, I should be able to make changes to my mobile application without impacting either the data structure or the database design on the server. At the same time, I should be able to modify the database or make changes to my server application without impacting the mobile client. This creates a separation of \nconcerns, letting each application grow and scale independently of the other and allowing your organization to grow quickly and efficiently.\n\nStateless\nREST APIs are stateless, meaning that calls can be made independently of one another, and each call contains all of the data necessary to complete itself successfully. A REST API should not rely on data being stored on the server or sessions to determine what to do with a call, but rather solely rely on the data that is provided in that call itself. Identifying information is not being stored on the server when making calls. Instead, each call has the necessary data in itself, such as the API key, access token, user ID, etc. This also helps increase the API’s reliability by having all of the data necessary to make the call, instead of relying on a series of calls with server state to create an object, which may result in partial fails. Instead, in order to reduce memory requirements and keep your application as scalable as possible, a RESTful API requires that any state is stored on the client—not on the server.\n\nCache\nBecause a stateless API can increase request overhead by handling large loads of incoming and outbound calls, a REST API should be designed to encourage the storage of cacheable data. This means that when data is cacheable, the response should indicate that the data can be stored up to a certain time (expires-at), or in cases where data needs to be real-time, that the response should not be cached by the client. By enabling this critical constraint, you will not only greatly reduce the number of interactions with your API, reducing internal server usage, but also provide your API users with the tools necessary to provide the fastest and most efficient apps possible. Keep in mind that caching is done on the client side. While you may be able to cache some data within your architecture to perform overall performance, the intent is to instruct the client on how it should proceed and whether or not the client can store the data temporarily.\n\nUniform Interface\nThe key to the decoupling client from server is having a uniform interface that allows independent evolution of the application without having the application’s services, models, or actions tightly coupled to the API layer itself. The uniform interface lets the client talk to the server in a single language, independent of the architectural backend of either. This interface should provide an unchanging, standardized means of communicating between the client and the server, such as using HTTP with URI resources, CRUD (Create, Read, Update, Delete), and JSON.\n\nLayered System\nAs the name implies, a layered system is a system comprised of layers, with each layer having a specific functionality and responsibility. If we think of a Model View Controller framework, each layer has its own responsibilities, with the models comprising how the data should be formed, the controller focusing on the incoming actions and the view focusing on the output. Each layer is separate but also interacts with the other. In REST API design, the same principle holds true, with different layers of the architecture working together to build a hierarchy that helps create a more scalable and modular application.\nA layered system also lets you encapsulate legacy systems and move less commonly accessed functionality to a shared intermediary while also shielding more modern and commonly used components from them. Additionally, the layered system gives you the freedom to move systems in and out of your architecture as technologies and services evolve, increasing flexibility and longevity as long as you keep the different modules as loosely coupled as possible. There are substantial security benefits of having a layered system since it allows you to stop attacks at the proxy layer, or within other layers, preventing them from getting to your actual server architecture. By utilizing a layered system with a proxy, or creating a single point of access, you are able to keep critical and more vulnerable aspects of your architecture behind a firewall, preventing direct interaction with them by the client. Keep in mind that security is not based on single “stop all” solution, but rather on having multiple layers with the understanding that certain security checks may fail or be bypassed. As such, the more security you are able to implement into your system, the more likely you are to prevent damaging Attacks.\n\nCode on Demand\nPerhaps the least known of the six constraints, and the only optional constraint, Code on Demand allows for code or applets to be transmitted via the API for use within the application. In essence, it creates a smart application that is no longer solely dependent on its own code structure. However, perhaps because it’s ahead of its time, Code on Demand has struggled for adoption as Web APIs are consumed across multiple languages and the transmission of code raises security questions and concerns. (For example, the directory would have to be writeable, and the firewall would have to let what may normally be restricted content through.)\nTogether, these constraints make up the theory of Representational State Transfer, or REST. As you look back through these you can see how each successive constraint builds on top of the previous, eventually creating a rather complex—but powerful and flexible—application program interface. But most importantly, these constraints make up a design that operates similarly to how we access pages in our browsers on the World Wide Web. It creates an API that is not dictated by its architecture, but by the representations that it returns, and an API that—while architecturally stateless—relies on the representation to dictate the application’s state.\n",
+									"type": "text"
+								},
+								{
+									"key": "categories_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "level",
+									"value": "beginner",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "lang",
+									"value": "English",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "privacy",
+									"value": "{{privacy}}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ext_api}}/course/create",
+							"host": [
+								"{{ext_api}}"
+							],
+							"path": [
+								"course",
+								"create"
 							]
 						},
 						"description": ""
